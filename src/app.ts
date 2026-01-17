@@ -9,3 +9,16 @@ app.get("/", (req, res) => {
 });
 
 export default app;
+
+interface HealthCheckResponse {
+    status: string;
+    version: string;
+}
+
+app.get("/src/api/v1/routes", (req, res) => {
+    const healthData: HealthCheckResponse = {
+        status: "OK",
+        version: "1.0.0"
+    };
+    res.json(healthData);
+});
