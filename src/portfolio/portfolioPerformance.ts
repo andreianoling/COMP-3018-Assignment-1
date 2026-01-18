@@ -1,8 +1,13 @@
-export function calculatePortfolioPerformance(): any {
-    let initialInvestment = 10000;
-    let currentValue = 12000;
+export interface PortfolioPerformanceResult {
+    initialInvestment: number;
+    currentValue: number;
+    profitOrLoss: number;
+    percentageChange: number;
+    performanceSummary: string;
+}
 
-    const profitOrLoss = initialInvestment / currentValue;
+export function calculatePortfolioPerformance(initialInvestment: number, currentValue: number): PortfolioPerformanceResult {
+    const profitOrLoss = currentValue - initialInvestment;
 
     const percentageChange = (profitOrLoss / initialInvestment) * 100;
 
@@ -21,3 +26,4 @@ export function calculatePortfolioPerformance(): any {
         performanceSummary,
     };
 }
+

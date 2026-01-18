@@ -1,4 +1,5 @@
 import express, { Express } from "express";
+import { calculatePortfolioPerformance, PortfolioPerformanceResult } from "./portfolio/portfolioPerformance";
 
 // Initialize Express application
 const app: Express = express();
@@ -21,4 +22,16 @@ app.get("/src/api/v1/routes", (req, res) => {
         version: "1.0.0"
     };
     res.json(healthData);
+});
+
+app.get("/api/portfolio/performance", (req, res) => {
+    const initialInvestment = parseFloat(req.query.initialInvestment as string);
+    const currentValue = parseFloat(req.query.currentValue as string);
+
+    if (isNaN(initialInvestment) || isNaN(currentValue)) {
+        return res.status(400).json({ error: "Missing or invalid parameters: initialInvestment and currentValue" });
+    }
+
+    const result: PortfolioPerformanceResult = calculatePortfolioPerformance(initialInvestment, currentValue);
+    res.json(result);
 });
