@@ -1,11 +1,11 @@
-import request, { Response } from "supertest";
-import app from "../src/app";
+import request, { Response } from "supertest"; // Import necessary modules
+import app from "../src/app"; // Import the Express application
 
 describe("GET /api/portfolio/performance", () => {
-    it("should return portfolio performance data for valid inputs with percentage gain over 60%", async () => {
-        const response: Response = await request(app)
-            .get("/api/portfolio/performance")
-            .query({ initialInvestment: 10000, currentValue: 16000 });
+    it("should return portfolio performance data for valid inputs with percentage gain over 60%", async () => { 
+        const response: Response = await request(app) // Make a GET request to the endpoint
+            .get("/api/portfolio/performance") // Endpoint path
+            .query({ initialInvestment: 10000, currentValue: 16000 }); // Query parameters
         expect(response.status).toBe(200);
         expect(response.body).toHaveProperty("initialInvestment", 10000);
         expect(response.body).toHaveProperty("currentValue", 16000);
