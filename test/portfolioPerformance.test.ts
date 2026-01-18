@@ -14,12 +14,12 @@ describe("GET /api/portfolio/performance", () => {
         expect(response.body).toHaveProperty("performanceSummary", "Excellent performance! Your investments are doing great.");
     });
 
-    it("should return 400 error for missing parameters", async () => {
-        const response: Response = await request(app)
-            .get("/api/portfolio/performance")
-            .query({ initialInvestment: 10000 });
+    it("should return 400 error for missing parameters", async () => { // Test for missing parameters
+        const response: Response = await request(app) // Make a GET request to the endpoint
+            .get("/api/portfolio/performance") // Endpoint path
+            .query({ initialInvestment: 10000 }); // Missing currentValue parameter
         expect(response.status).toBe(400);
-        expect(response.body).toHaveProperty("error", "Missing or invalid parameters: initialInvestment and currentValue");
+        expect(response.body).toHaveProperty("error", "Missing or invalid parameters: initialInvestment and currentValue"); // Check error message
     });
     
     it("should return portfolio performance data for valid inputs with percentage loss greater than -10%", async () => {
