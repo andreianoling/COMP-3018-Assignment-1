@@ -28,10 +28,10 @@ app.get("/api/portfolio/performance", (req, res) => {
     const initialInvestment = parseFloat(req.query.initialInvestment as string);
     const currentValue = parseFloat(req.query.currentValue as string);
 
-    if (isNaN(initialInvestment) || isNaN(currentValue)) {
+    if (isNaN(initialInvestment) || isNaN(currentValue)) { // Validation check
         return res.status(400).json({ error: "Missing or invalid parameters: initialInvestment and currentValue" });
     }
 
-    const result: PortfolioPerformanceResult = calculatePortfolioPerformance(initialInvestment, currentValue);
+    const result: PortfolioPerformanceResult = calculatePortfolioPerformance(initialInvestment, currentValue); // Call the function to get performance data
     res.json(result);
 });
