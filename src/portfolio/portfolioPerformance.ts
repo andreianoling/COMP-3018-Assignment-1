@@ -4,9 +4,11 @@ export interface PortfolioPerformanceResult { // Define the structure of the per
     profitOrLoss: number;
     percentageChange: number;
     performanceSummary: string;
+    performanceRating: number;
 }
 
 export function calculatePortfolioPerformance(initialInvestment: number, currentValue: number): PortfolioPerformanceResult { // Function to calculate portfolio performance with initialInvestment and currentValue as parameters
+    
     const profitOrLoss = currentValue - initialInvestment; // Calculate profit or loss
 
     const percentageChange = (profitOrLoss / initialInvestment) * 100; // Calculate percentage change
@@ -19,12 +21,20 @@ export function calculatePortfolioPerformance(initialInvestment: number, current
         percentageChange > -10 ? "Minor loss. Stay calm and review your options." :
         "Significant loss. Review your portfolio strategy.";
 
+    const performanceRating =
+        percentageChange >=30? 5:
+        percentageChange >=10? 4:
+        percentageChange > 0 ? 3:
+        percentageChange > -10? 2:
+        1;
+
     return { // Return the performance result object
         initialInvestment,
         currentValue,
         profitOrLoss,
         percentageChange,
         performanceSummary,
+        performanceRating,
     };
 }
 

@@ -2,6 +2,18 @@ import request, { Response } from "supertest"; // Import necessary modules
 import app from "../src/app"; // Import the Express application
 
 describe("GET /api/portfolio/performance", () => {
+    it("Temp test for debugging", async () => {  // Debugging analysis Scenario C
+        const response: Response = await request(app) 
+            .get("/api/portfolio/performance") 
+            .query({ initialInvestment: 3300, currentValue: 3000 }); 
+        expect(response.status).toBe(200);
+        expect(response.body).toHaveProperty("initialInvestment", 3300);
+        expect(response.body).toHaveProperty("currentValue", 3000);
+        expect(response.body).toHaveProperty("profitOrLoss", -300);
+        expect(response.body).toHaveProperty("percentageChange", -9.090909090909092); // Must have percentage change between -15% and -5%
+        expect(response.body).toHaveProperty("performanceSummary", "Minor loss. Stay calm and review your options."); 
+    });
+
     it("should return portfolio performance data for valid inputs with percentage gain over 60%", async () => { 
         const response: Response = await request(app) // Make a GET request to the endpoint
             .get("/api/portfolio/performance") // Endpoint path
