@@ -21,7 +21,7 @@ export function calculatePortfolioPerformance(initialInvestment: number, current
         percentageChange > -10 ? "Minor loss. Stay calm and review your options." :
         "Significant loss. Review your portfolio strategy.";
 
-    const performanceRating =
+    const performanceRating = // Determine rating based on percentage change
         percentageChange >=30? 5:
         percentageChange >=10? 4:
         percentageChange > 0 ? 3:
